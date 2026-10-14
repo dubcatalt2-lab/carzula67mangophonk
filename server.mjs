@@ -1,0 +1,33 @@
+import express from 'express';
+import {createCommunity} from './lib/community.mjs';
+import {randomUUID} from 'node:crypto';
+import {createServer} from 'node:http';
+import {fileURLToPath} from 'node:url';
+import {startWispurr} from './lib/bridge.mjs';
+const root=fileURLToPath(new URL('./public/',import.meta.url));
+const app=express();
+app.disable('x-powered-by');
+app.use((_req,res,next)=>{res.setHeader('Cross-Origin-Opener-Policy','same-origin');res.setHeader('Cross-Origin-Embedder-Policy','credentialless');res.setHeader('X-Content-Type-Options','nosniff');next();});
+app.use('/api/ai',(_req,res)=>res.status(503).json({error:'AI is not configured for this Novene installation yet.'}));
+const sessions=new Map();
+app.post('/api/session',(_req,res)=>{const token=randomUUID();sessions.set(token,Date.now());res.json({token});});
+app.get('/api/ping',(req,res)=>{const token=req.get('X-Novene-Auth');if(sessions.has(token))sessions.set(token,Date.now());res.json({ok:true});});
+app.get('/api/ccu',(_req,res)=>{for(const [token,time] of sessions)if(time<Date.now()-60000)sessions.delete(token);res.json({ccu:sessions.size});});
+const community=await createCommunity({directory:process.env.COMMUNITY_DATA||'data/community'});
+app.use('/api/community',community.router);
+let bridge;
+app.get('/healthz',(_req,res)=>res.status(bridge?.isRunning?200:503).json({ready:!!bridge?.isRunning}));
+app.use(express.static(root,{setHeaders(res,path){if(path.endsWith('.js')||path.endsWith('.mjs')||path.endsWith('.html'))res.setHeader('Cache-Control','no-cache');}}));
+app.use((_req,res)=>res.status(404).type('text').send('Page not found. Return to the Novene home page.'));
+const server=createServer(app);
+bridge=await startWispurr({port:Number(process.env.WORKER_PORT||6101),onFailure:error=>{console.error(error.message);server.close();}});
+server.on('upgrade',(req,socket,head)=>{
+ if(req.url==='/api/community/socket')community.upgrade(req,socket,head);
+ else if(['/wisp/','/wisp'].includes(req.url))bridge.route(req,socket,head);
+ else socket.end('HTTP/1.1 404 Not Found\r\nConnection: close\r\n\r\n');
+});
+server.once('error',async error=>{console.error(error.message);await bridge.stop();process.exitCode=1;});
+server.listen(Number(process.env.PORT||8081),process.env.HOST||'127.0.0.1',()=>console.log(`Novene ready at http://localhost:${server.address().port}`));
+let closing=false;
+async function stop(){if(closing)return;closing=true;server.close();server.closeAllConnections();await bridge.stop();await community.close();}
+process.once('SIGINT',stop);process.once('SIGTERM',stop);
