@@ -8,7 +8,7 @@ await mkdir('public/original',{recursive:true});
 const boot=`function bootNve(){if(nve)return Promise.resolve(nve);if(nveBooting)return nveBooting;nveBooting=import('/engine.mjs').then(m=>m.bootstrap()).then(controller=>{nve=controller;tabs.forEach(tab=>{if(tab.kind!=='browser'||tab.page)return;if(!tab.sframe)tab.sframe=nve.createFrame(tab.iframe);if(tab.pendingUrl){const target=tab.pendingUrl;tab.pendingUrl=null;navigate(tab.id,target);}});return nve;}).catch(error=>{nveBooting=null;window.dispatchEvent(new CustomEvent('novene-engine-state',{detail:{message:error.message,error:true}}));throw error;});return nveBooting;}`;
 const navigationSource=(await readFile('public/navigation.mjs','utf8')).replace(/export /g,'');
 await writeFile('public/input.js','(()=>{'+navigationSource+';window.noveneResolveInput=resolveInput;})();');
-let tags='<script src="/input.js"></script><script src="/vendor/purify.min.js"></script><script src="/vendor/marked.min.js"></script><script src="/vendor/katex/katex.min.js"></script><script src="/vendor/engine/scramjet.js"></script><script src="/vendor/controller/controller.api.js"></script><script>window.$nvectrl=window.$scramjetController;</script>';
+let tags='<script src="/input.js"></script><script src="/vendor/purify.min.js"></script><script src="/vendor/marked.min.js"></script><script src="/vendor/katex/katex.min.js"></script><script src="/vendor/engine/__90638.js"></script><script src="/vendor/controller/controller.api.js"></script><script>window.$nvectrl=window.$__90638Controller;</script>';
 for(const i of [1,6,7,8,9,10,11,12,13]){
  let code=blobs[i];
  if(i===6)code=repairLibrary(code);

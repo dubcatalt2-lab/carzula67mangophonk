@@ -20,7 +20,7 @@ export function bootstrap(){
   const endpoint=new URL('/wisp/',location.href);endpoint.protocol=location.protocol==='https:'?'wss:':'ws:';
   const transport=new HttpClient({wisp:endpoint.href,websocket:endpoint.href});
   await timeout(transport.init(),20000,'The HTTP client could not start.');
-  const controller=new window.$scramjetController.Controller({serviceworker:registration.active,transport,config:{prefix:'/browse/',scramjetPath:'/vendor/engine/scramjet.js',injectPath:'/vendor/controller/controller.inject.js',wasmPath:'/vendor/engine/scramjet.wasm',virtualWasmPath:'scramjet.wasm.js'},scramjetConfig:{flags:{captureErrors:false,cleanErrors:false,sourcemaps:false,rewriterLogs:false,allowFailedIntercepts:true}}});
+  const controller=new window.$__90638Controller.Controller({serviceworker:registration.active,transport,config:{prefix:'/browse/',__90638Path:'/vendor/engine/__90638.js',injectPath:'/vendor/controller/controller.inject.js',wasmPath:'/vendor/engine/__90638.wasm',virtualWasmPath:'__90638.wasm.js'},__90638Config:{flags:{captureErrors:false,cleanErrors:false,sourcemaps:false,rewriterLogs:false,allowFailedIntercepts:true}}});
   state('Preparing the browser...');
   await timeout(controller.wait(),15000,'The browser controller did not become ready.');
   state('Ready');
