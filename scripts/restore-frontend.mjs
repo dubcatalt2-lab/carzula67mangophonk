@@ -1,5 +1,6 @@
 ﻿import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {parse} from 'acorn';
+import {repairLibrary} from './repair-library.mjs';
 const svg=await readFile('reference/novene.svg','utf8');
 const packed=svg.match(/NOVENE_BLOBS\s*=\s*(\[[\s\S]*?\]);/)[1];
 const blobs=JSON.parse(packed.replace(/,\s*\]/,']')).map(value=>Buffer.from(value,'base64').toString('utf8'));
@@ -10,6 +11,7 @@ await writeFile('public/input.js','(()=>{'+navigationSource+';window.noveneResol
 let tags='<script src="/input.js"></script><script src="/vendor/purify.min.js"></script><script src="/vendor/marked.min.js"></script><script src="/vendor/katex/katex.min.js"></script><script src="/vendor/engine/scramjet.js"></script><script src="/vendor/controller/controller.api.js"></script><script>window.$nvectrl=window.$scramjetController;</script>';
 for(const i of [1,6,7,8,9,10,11,12,13]){
  let code=blobs[i];
+ if(i===6)code=repairLibrary(code);
  const normalizer=parse(code,{ecmaVersion:'latest'}).body.find(node=>node.type==='FunctionDeclaration'&&node.id.name==='norm');
  if(normalizer)code=code.slice(0,normalizer.start)+`function norm(value){try{return window.noveneResolveInput(value,settings.search);}catch(error){window.dispatchEvent(new CustomEvent('novene-engine-state',{detail:{message:error.message,error:true}}));return '';}}`+code.slice(normalizer.end);
 
