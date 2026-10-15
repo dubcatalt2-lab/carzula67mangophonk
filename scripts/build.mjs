@@ -24,6 +24,8 @@ await cp('node_modules/katex/dist','public/vendor/katex',{recursive:true});
 await cp('node_modules/marked/marked.min.js','public/vendor/marked.min.js');
 await cp('node_modules/dompurify/dist/purify.min.js','public/vendor/purify.min.js');
 
+// Stale outputs from earlier naming schemes would otherwise stay served.
+await rm('.published',{recursive:true,force:true});
 await import('./publish.mjs');
 
 await mkdir('.published/licenses',{recursive:true});
