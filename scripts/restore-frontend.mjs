@@ -1,4 +1,4 @@
-﻿import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {parse} from 'acorn';
 import {repairLibrary} from './repair-library.mjs';
 import {__74122,__74125} from './__74120.mjs';
@@ -69,6 +69,6 @@ html=html.replace('Search with Brave...','Search the web...');
 html=html.replace('ad free (contact v8ii@discord for a key)','No ads yet. Contact @vdrtes on Discord or dubcatalt2@gmail.com for inquiries.');
 html=html.replace('<div class="set-body">','<div class="set-body"><section class="set-group"><div class="set-group-title"><i data-lucide="user-round"></i><span>accounts</span></div><div class="set-card" data-account-settings></div></section>');
 html=html.replace('</head>' ,'<link rel="stylesheet" href="/connection-panel.css"><link rel="stylesheet" href="/wallpapers.css"><link rel="stylesheet" href="/community.css"></head>');
-html=html.replace('</body>',tags+'<script src="/page-security.js"></script><script src="/connection-panel.js"></script><script src="/ai-catalog.js"></script><script src="/search-default.js"></script><script src="/wallpapers.js"></script><script src="/oneko.js"></script><script src="/account-access.js"></script><script src="/community.js"></script></body>');
+html=html.replace('</body>',tags+'<script src="/page-security.js"></script><script src="/connection-panel.js"></script><script src="/ai-catalog.js"></script><script src="/search-default.js"></script><script src="/wallpapers.js"></script><script src="/oneko.js"></script><script src="/account-access.js"></script><script src="/__74200.js"></script><script src="/community.js"></script></body>');
 await writeFile('public/index.html','<!doctype html>\n'+__74125(html).replace(/^[ \t]+$/gm,''));
 console.log('Restored original SVG markup and styles; original UI scripts connected to local SJv2/libcurl/Wispurr.');
