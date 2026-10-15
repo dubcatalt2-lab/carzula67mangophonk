@@ -84,3 +84,13 @@ Release 92d752b deployed: public testing.itcode.fyi HTTPS, browsing/WebSocket an
 Chat emoji update uses the Nyx shortcode catalog and matching case-insensitive expansion, with ranked colon suggestions, arrow-key selection, Enter/Tab insertion, Escape dismissal, Enter-to-send and Shift+Enter for new lines. IME composition is not submitted. Unknown shortcodes remain literal text. Source and obfuscated browser account/chat tests verify emoji transmission and keyboard behavior. Owner promotion was requested for the existing vdrtes account #2; verification is recorded separately after activation.
 
 Verified vdrtes account #2 is owner in Firestore after a controlled service stop, transactional role change and restart. No other account roles changed. Existing sessions remain valid; reopening chat reloads the role and owner controls. Emoji UI deployed in dfc6f84; final live HTTPS and shortcode checks pass. The stop took the existing 90-second shutdown timeout.
+
+## Roles and owner dashboard
+
+Added owner/admin/dev/mod/booster/member with server-enforced hierarchy. Owners manage all roles, bans and access; admins can assign lower roles, moderate lower-ranked public messages and post announcements; moderators can moderate lower-ranked members/public messages but cannot assign roles. Dev and Booster are display roles without automatic moderation, Premium or AI privileges. Private DMs remain private, and the final active owner cannot be removed. Existing vdrtes ownership is unchanged.
+
+Settings > Accounts > Owner dashboard lists members, roles, ban/restore controls and public activity counts. Premium controls stay in Accounts; ad-free key controls stay in Keys. Community-uploaded role artwork from the user-supplied emoji.gg directory is shipped locally with attribution; it is not an official Discord six-role set. New frontend code uses the existing Unicode/minification/DOM mapping build without altering __90638.
+
+DuckDuckGo full/HTML/Lite endpoints still return upstream errors through the shared Ashburn exit. A direct request from that same namespace also returned DuckDuckGo's human challenge. The error page now offers Retry DuckDuckGo and an explicitly labeled optional Bing search; DuckDuckGo remains the default, with no silent provider switch. Do not report the upstream restriction fixed. The unfinished Cloudflare integration remains excluded.
+
+Validation: 21 working-tree unit tests pass (including two dormant solver tests); source and published owner dashboard role/ban/restore tests pass; the published browsing and community suites pass. Error recovery was tested through the live connection and reaches Bing results without changing the default preference. Deployment status is recorded after activation.
