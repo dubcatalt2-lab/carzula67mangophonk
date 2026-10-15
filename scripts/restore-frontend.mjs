@@ -47,6 +47,7 @@ for(const i of [1,6,7,8,9,10,11,12,13]){
  if(i===9)code=code.replace('const groups=[{title:"vision",items:AI_MODELS.filter(m=>modelVision(m.id))},{title:"text",items:AI_MODELS.filter(m=>!modelVision(m.id))}];',`const order=['openai','anthropic','google','x-ai'];const names={openai:'OpenAI',anthropic:'Anthropic',google:'Google','x-ai':'xAI'};const companies=[...new Set(AI_MODELS.map(m=>m.id.split('/')[0]))].sort((a,b)=>(order.includes(a)?order.indexOf(a):99)-(order.includes(b)?order.indexOf(b):99)||a.localeCompare(b));const groups=companies.map(c=>({title:names[c]||c,items:AI_MODELS.filter(m=>m.id.split('/')[0]===c)}));`);
  if(i===9)code=code.replace('const AI_VISION_DEFAULT=', 'let AI_VISION_DEFAULT=').replace('let html=window.marked.parse(src);','let html=window.DOMPurify.sanitize(window.marked.parse(src));');
  if(i===10)code=code.replace('const ENGINES={','const ENGINES={bing:"https://www.bing.com/search?format=rss&q=",');
+ if(i===11){const node=parse(code,{ecmaVersion:'latest'}).body.find(n=>n.type==='FunctionDeclaration'&&n.id.name==='checkPlusKey');if(!node)throw Error('Key description contract changed');code=code.slice(0,node.start)+`function checkPlusKey(){if(setPlusKeySub){setPlusKeySub.textContent="No ads yet. Contact @vdrtes on Discord or dubcatalt2@gmail.com for inquiries.";setPlusKeySub.style.color="";}}`+code.slice(node.end);}
  if(i===11)code=code.replace('search:"brave"','search:"ddg"');
  if(i===8)code=code.replace('const hasTabs=[...tabs.values()].some(t=>t.kind==="browser"&&t.url);','const hasTabs=true;');
  // The original shell's online indicator belongs to this installation.
@@ -61,6 +62,7 @@ html=html.replace('<button class="set-dropdown-opt" data-value="brave"', '<butto
 html=html.replace('confirm before close','close protection').replace('ask before closing with tabs open','ask before leaving or closing Novene');
 for(const [old,theme] of Object.entries({n:'green',red:'red',blue:'blue',black:'black',white:'white'}))html=html.replaceAll('https://cdn.frostedbrowser.cfd/wallpapers/'+old+'.png','/wallpapers/moon.jpg');
 html=html.replace('Search with Brave...','Search the web...');
+html=html.replace('ad free (contact v8ii@discord for a key)','No ads yet. Contact @vdrtes on Discord or dubcatalt2@gmail.com for inquiries.');
 html=html.replace('<div class="set-body">','<div class="set-body"><section class="set-group"><div class="set-group-title"><i data-lucide="user-round"></i><span>accounts</span></div><div class="set-card" data-account-settings></div></section>');
 html=html.replace('</head>' ,'<link rel="stylesheet" href="/connection-panel.css"><link rel="stylesheet" href="/wallpapers.css"><link rel="stylesheet" href="/community.css"></head>');
 html=html.replace('</body>',tags+'<script src="/page-security.js"></script><script src="/connection-panel.js"></script><script src="/ai-catalog.js"></script><script src="/search-default.js"></script><script src="/wallpapers.js"></script><script src="/oneko.js"></script><script src="/account-access.js"></script><script src="/community.js"></script></body>');
