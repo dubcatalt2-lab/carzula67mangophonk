@@ -44,6 +44,7 @@ for(const i of [1,6,7,8,9,10,11,12,13]){
   code=code.replace('tab.url=target;recordVisit(tab);','tab.pendingUrl=null;tab.url=target;recordVisit(tab);');
   code=code.replace('if(tab.kind!=="browser"||!tab.iframe||tab.page)return;','if(tab.kind!=="browser"||!tab.iframe||tab.page||tab.pendingUrl||tab.url.startsWith("novene://"))return;');
  }
+ if(i===9)code=code.replace('const groups=[{title:"vision",items:AI_MODELS.filter(m=>modelVision(m.id))},{title:"text",items:AI_MODELS.filter(m=>!modelVision(m.id))}];',`const order=['openai','anthropic','google','x-ai'];const names={openai:'OpenAI',anthropic:'Anthropic',google:'Google','x-ai':'xAI'};const companies=[...new Set(AI_MODELS.map(m=>m.id.split('/')[0]))].sort((a,b)=>(order.includes(a)?order.indexOf(a):99)-(order.includes(b)?order.indexOf(b):99)||a.localeCompare(b));const groups=companies.map(c=>({title:names[c]||c,items:AI_MODELS.filter(m=>m.id.split('/')[0]===c)}));`);
  if(i===9)code=code.replace('const AI_VISION_DEFAULT=', 'let AI_VISION_DEFAULT=').replace('let html=window.marked.parse(src);','let html=window.DOMPurify.sanitize(window.marked.parse(src));');
  if(i===10)code=code.replace('const ENGINES={','const ENGINES={bing:"https://www.bing.com/search?format=rss&q=",');
  if(i===11)code=code.replace('search:"brave"','search:"ddg"');
@@ -61,6 +62,6 @@ html=html.replace('confirm before close','close protection').replace('ask before
 for(const [old,theme] of Object.entries({n:'green',red:'red',blue:'blue',black:'black',white:'white'}))html=html.replaceAll('https://cdn.frostedbrowser.cfd/wallpapers/'+old+'.png','/wallpapers/moon.jpg');
 html=html.replace('Search with Brave...','Search the web...');
 html=html.replace('</head>' ,'<link rel="stylesheet" href="/connection-panel.css"><link rel="stylesheet" href="/wallpapers.css"><link rel="stylesheet" href="/community.css"></head>');
-html=html.replace('</body>',tags+'<script src="/page-security.js"></script><script src="/connection-panel.js"></script><script src="/ai-catalog.js"></script><script src="/search-default.js"></script><script src="/wallpapers.js"></script><script src="/oneko.js"></script><script src="/community.js"></script></body>');
+html=html.replace('</body>',tags+'<script src="/page-security.js"></script><script src="/connection-panel.js"></script><script src="/ai-catalog.js"></script><script src="/search-default.js"></script><script src="/wallpapers.js"></script><script src="/oneko.js"></script><script src="/account-access.js"></script><script src="/community.js"></script></body>');
 await writeFile('public/index.html','<!doctype html>\n'+html.replace(/^[ \t]+$/gm,''));
 console.log('Restored original SVG markup and styles; original UI scripts connected to local SJv2/libcurl/Wispurr.');
