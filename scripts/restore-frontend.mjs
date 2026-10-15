@@ -5,7 +5,7 @@ const packed=svg.match(/NOVENE_BLOBS\s*=\s*(\[[\s\S]*?\]);/)[1];
 const blobs=JSON.parse(packed.replace(/,\s*\]/,']')).map(value=>Buffer.from(value,'base64').toString('utf8'));
 await mkdir('public/original',{recursive:true});
 const boot=`function bootNve(){if(nve)return Promise.resolve(nve);if(nveBooting)return nveBooting;nveBooting=import('/engine.mjs').then(m=>m.bootstrap()).then(controller=>{nve=controller;tabs.forEach(tab=>{if(tab.kind!=='browser'||tab.page)return;if(!tab.sframe)tab.sframe=nve.createFrame(tab.iframe);if(tab.pendingUrl){const target=tab.pendingUrl;tab.pendingUrl=null;navigate(tab.id,target);}});return nve;}).catch(error=>{nveBooting=null;throw error;});return nveBooting;}`;
-let tags='<script src="/vendor/marked.min.js"></script><script src="/vendor/katex/katex.min.js"></script><script src="/vendor/engine/scramjet.js"></script><script src="/vendor/controller/controller.api.js"></script><script>window.$nvectrl=window.$scramjetController;</script>';
+let tags='<script src="/vendor/marked.min.js"></script><script src="/vendor/katex/katex.min.js"></script><script src="/vendor/engine/__90638.js"></script><script src="/vendor/controller/controller.api.js"></script><script>window.$nvectrl=window.$__90638Controller;</script>';
 for(const i of [1,6,7,8,9,10,11,12,13]){
  let code=blobs[i];
  if(i===12){
