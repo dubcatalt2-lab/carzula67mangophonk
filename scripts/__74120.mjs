@@ -5,6 +5,7 @@ export const __74121=[
  ['__74107','coral',12,88,72],['__74108','midnight blue',222,72,70]
 ];
 export function __74122(__74123){
+ __74123=__74123.replace('colorMenu.classList.toggle("open",open);',`if(open){const __74130=colorBtn.getBoundingClientRect(),__74131=colorRoot.closest('.set-body')?.getBoundingClientRect(),__74132=Math.max(0,__74130.top-Math.max(0,__74131?.top||0)-12),__74133=Math.max(0,Math.min(innerHeight,__74131?.bottom||innerHeight)-__74130.bottom-12),__74134=__74132>__74133; colorMenu.style.top=__74134?'auto':'calc(100% + 6px)';colorMenu.style.bottom=__74134?'calc(100% + 6px)':'auto';colorMenu.style.maxHeight=Math.min(360,__74134?__74132:__74133)+'px';}colorMenu.classList.toggle("open",open);`);
  const __74124=Object.fromEntries(__74121.map(([id,label])=>[id,label]));
  __74123=__74123.replace('const MODE_ACCENT={','const MODE_ACCENT={'+__74121.map(([id])=>JSON.stringify(id)+':'+JSON.stringify(id)).join(',')+',');
  __74123=__74123.replace('colorLabel.textContent=settings.mode','colorLabel.textContent=('+JSON.stringify(__74124)+')[settings.mode]||settings.mode');
@@ -25,6 +26,7 @@ export function __74125(__74126){
  }
  body[data-mode="${id}"] .wallpaper{background:linear-gradient(var(--wall-tint),var(--wall-tint-2)),url('/wallpapers/moon.jpg') center/cover no-repeat,var(--bg);}`).join('\n');
  __74128+='body[data-mode="green"] .wallpaper{background:linear-gradient(var(--wall-tint),var(--wall-tint-2)),url("/n.png") center/cover no-repeat,var(--bg);}#setColorModeMenu{max-height:min(360px,55vh);overflow-y:auto;overscroll-behavior:contain;}';
+ __74128+='#setColorModeMenu{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:var(--muted) var(--panel-2);color-scheme:dark;}#setColorModeMenu::-webkit-scrollbar{width:6px;}#setColorModeMenu::-webkit-scrollbar-track{background:var(--panel-2);}#setColorModeMenu::-webkit-scrollbar-thumb{background:var(--muted);border-radius:8px;}';
  return __74126.replace('</head>','<style>'+__74128+'</style></head>');
 }
 function __74129(h,s,l){s/=100;l/=100;const a=s*Math.min(l,1-l);return [0,8,4].map(n=>{const k=(n+h/30)%12;return Math.round(255*(l-a*Math.max(-1,Math.min(k-3,9-k,1))))}).join(',');}
