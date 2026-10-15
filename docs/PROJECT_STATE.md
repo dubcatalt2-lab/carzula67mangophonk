@@ -68,3 +68,13 @@ Catalog sources now load concurrently and publish results as each arrives, with 
 The separate Cloudflare fallback is work in progress in the working tree; it is not part of this game-loading deployment and no solver service is active.
 
 Shared VPN selection changed at the user's request to us-qas-wg-304 (Ashburn, VA, USA). The isolated gateway verified that exact Mullvad exit; /var/lib/novene-vpn/selection.json persists the choice across namespace startup. Earlier New York descriptions are historical.
+
+Local theme expansion: synced upstream 307ea60 and retained __90638 naming and publication cleanup. Added eight opaque-ID color modes (lavender, dark purple, hot pink, light pink, teal, amber, coral, midnight blue), matching accent/panel/favicon colors and a scrollable picker. Green defaults to existing n.png; black keeps moon.jpg; custom uploads still override defaults. Local browser checks passed all eight selections, reload persistence, both wallpaper paths and renamed engine asset availability. Windows build invokes python while other systems retain python3; the upstream obfuscation script is unchanged. These theme changes are built on localhost:8081 and not yet pushed or deployed.
+
+## HTTPS and built-in page audit
+
+Configured testing.itcode.fyi as an additional Caddy hostname for Novene port 8181. Let's Encrypt issuance succeeded and the public Cloudflare endpoint returned HTTP 200 with /healthz ready=true; the previous 525 came from the unconfigured hostname. Existing Novene hostname remains active. Shared Ashburn connection remains enabled and verified.
+
+Interactive audit covered home, game catalog/playback, AI model/provider controls and signed-out submission handling, apps catalog, history, partners, changelogs, credits, all six Settings sections, theme persistence, custom wallpaper lifecycle, Oneko and navigation. Isolated community browser tests cover sign-up, live messages, profile editing, announcement restrictions, image/video/voice attachments, DMs, friends, mute/block and close protection. Production signed-in AI generation and owner-only workflows were not exercised with a real owner account. No claim of exhaustive absence of bugs is made.
+
+DuckDuckGo still renders its Unexpected error page through the shared exit. Bing reader query/result/back navigation and direct addresses pass. The worker revival regression now uses a stable direct document, independent of search-provider availability; the DuckDuckGo failure remains open. The UGS catalog 404 and unfinished Cloudflare solver integration remain open. Theme release includes upstream __90638 obfuscation changes and Windows Python executable selection.

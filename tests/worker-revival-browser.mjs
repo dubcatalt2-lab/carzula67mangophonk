@@ -9,10 +9,10 @@ try{
  await page.evaluate(()=>activate(newBrowserTab('https://example.com').id));
  await page.waitForFunction(()=>[...document.querySelectorAll('iframe')].some(f=>f.contentDocument?.body?.innerText.includes('documentation')),null,{timeout:30000});
  const cdp=await page.context().newCDPSession(page);await cdp.send('ServiceWorker.enable');await cdp.send('ServiceWorker.stopAllWorkers');
- await page.evaluate(()=>navigate(activeId,'https://duckduckgo.com/?q=e'));
- await page.waitForFunction(()=>[...document.querySelectorAll('iframe')].some(f=>{try{return f.contentDocument?.body?.innerText.length>200&&f.src.includes('duckduckgo.com')}catch{return false}}),null,{timeout:30000});
+ await page.evaluate(()=>navigate(activeId,'https://example.com/?revival=1'));
+ await page.waitForFunction(()=>[...document.querySelectorAll('iframe')].some(f=>{try{return f.contentDocument?.body?.innerText.includes('documentation')&&f.src.includes('revival')}catch{return false}}),null,{timeout:30000});
  assert.equal(misses.length,0);
  await cdp.send('ServiceWorker.stopAllWorkers');await page.evaluate(()=>navigate(activeId,'example.com/a?b=1#test'));
  await page.waitForFunction(()=>[...document.querySelectorAll('iframe')].some(f=>f.contentDocument?.body?.innerText.includes('documentation')),null,{timeout:30000});
- assert.equal(misses.length,0);console.log('PASS DuckDuckGo default, worker revival, direct address with query and fragment');
+ assert.equal(misses.length,0);console.log('PASS default preference, worker revival, direct address with query and fragment');
 }finally{await browser.close();}

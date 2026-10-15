@@ -10,7 +10,7 @@ const client=await readFile('public/vendor/http/index.mjs','utf8');
 await writeFile('public/vendor/http/index.mjs',patchClientSockets(client));
 
 // Fresh copies carry the original names; rename them to match the rest of public/.
-const renamed=spawnSync('python3',['obfs.py','public/vendor'],{stdio:'inherit'});
+const renamed=spawnSync(process.platform==='win32'?'python':'python3',['obfs.py','public/vendor'],{stdio:'inherit'});
 if(renamed.status!==0)throw Error('obfs.py failed; vendor assets still use the original names');
 
 const enginePath='public/vendor/engine/__90638.js';

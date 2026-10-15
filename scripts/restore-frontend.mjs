@@ -1,6 +1,7 @@
 ﻿import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {parse} from 'acorn';
 import {repairLibrary} from './repair-library.mjs';
+import {__74122,__74125} from './__74120.mjs';
 const svg=await readFile('reference/novene.svg','utf8');
 const packed=svg.match(/NOVENE_BLOBS\s*=\s*(\[[\s\S]*?\]);/)[1];
 const blobs=JSON.parse(packed.replace(/,\s*\]/,']')).map(value=>Buffer.from(value,'base64').toString('utf8'));
@@ -11,6 +12,7 @@ await writeFile('public/input.js','(()=>{'+navigationSource+';window.noveneResol
 let tags='<script src="/input.js"></script><script src="/vendor/purify.min.js"></script><script src="/vendor/marked.min.js"></script><script src="/vendor/katex/katex.min.js"></script><script src="/vendor/engine/__90638.js"></script><script src="/vendor/controller/controller.api.js"></script><script>window.$nvectrl=window.$__90638Controller;</script>';
 for(const i of [1,6,7,8,9,10,11,12,13]){
  let code=blobs[i];
+ if(i===11)code=__74122(code);
  if(i===6)code=repairLibrary(code);
  const normalizer=parse(code,{ecmaVersion:'latest'}).body.find(node=>node.type==='FunctionDeclaration'&&node.id.name==='norm');
  if(normalizer)code=code.slice(0,normalizer.start)+`function norm(value){try{return window.noveneResolveInput(value,settings.search);}catch(error){window.dispatchEvent(new CustomEvent('novene-engine-state',{detail:{message:error.message,error:true}}));return '';}}`+code.slice(normalizer.end);
@@ -68,5 +70,5 @@ html=html.replace('ad free (contact v8ii@discord for a key)','No ads yet. Contac
 html=html.replace('<div class="set-body">','<div class="set-body"><section class="set-group"><div class="set-group-title"><i data-lucide="user-round"></i><span>accounts</span></div><div class="set-card" data-account-settings></div></section>');
 html=html.replace('</head>' ,'<link rel="stylesheet" href="/connection-panel.css"><link rel="stylesheet" href="/wallpapers.css"><link rel="stylesheet" href="/community.css"></head>');
 html=html.replace('</body>',tags+'<script src="/page-security.js"></script><script src="/connection-panel.js"></script><script src="/ai-catalog.js"></script><script src="/search-default.js"></script><script src="/wallpapers.js"></script><script src="/oneko.js"></script><script src="/account-access.js"></script><script src="/community.js"></script></body>');
-await writeFile('public/index.html','<!doctype html>\n'+html.replace(/^[ \t]+$/gm,''));
+await writeFile('public/index.html','<!doctype html>\n'+__74125(html).replace(/^[ \t]+$/gm,''));
 console.log('Restored original SVG markup and styles; original UI scripts connected to local SJv2/libcurl/Wispurr.');
