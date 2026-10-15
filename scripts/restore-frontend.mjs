@@ -40,7 +40,7 @@ for(const i of [1,6,7,8,9,10,11,12,13]){
  if(i===8){
   const before='if(!tab.sframe){tab.pendingUrl=target;';
   if(!code.includes(before))throw Error('Navigation frame contract changed');
-  code=code.replace(before,`if(tab.page){tab.page=null;tab.iframe.classList.remove("faizframe-page");tab.iframe.removeAttribute("src");tab.sframe=null;tab.lastHref="";}if(!tab.sframe&&nve)tab.sframe=nve.createFrame(tab.iframe);if(!tab.sframe){tab.pendingUrl=target;`);
+  code=code.replace(before,`if(tab.page){const fresh=document.createElement("iframe");fresh.className="faizframe";fresh.setAttribute("title","novene browser");fresh.setAttribute("frameborder","0");tab.iframe.replaceWith(fresh);tab.iframe=fresh;tab.page=null;tab.sframe=null;tab.lastHref="";}if(!tab.sframe&&nve)tab.sframe=nve.createFrame(tab.iframe);if(!tab.sframe){tab.pendingUrl=target;`);
   code=code.replace('tab.url=target;recordVisit(tab);','tab.pendingUrl=null;tab.url=target;recordVisit(tab);');
   code=code.replace('if(tab.kind!=="browser"||!tab.iframe||tab.page)return;','if(tab.kind!=="browser"||!tab.iframe||tab.page||tab.pendingUrl||tab.url.startsWith("novene://"))return;');
  }

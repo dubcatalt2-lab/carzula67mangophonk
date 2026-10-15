@@ -7,4 +7,5 @@ for(let i=0;i<8;i++){
  await p.waitForFunction(q=>{const t=activeTab();return t?.url.includes(encodeURIComponent(q))&&t.sframe&&!t.page&&t.iframe.classList.contains('active')},query,{timeout:15000});
  assert.equal(await p.evaluate(()=>homeView.classList.contains('hidden')),true);
 }
+await p.evaluate(()=>{navigate(activeId,'novene://credits');navigate(activeId,'novene://home');navigate(activeId,'https://example.com');});await p.waitForFunction(()=>activeTab().iframe.contentDocument?.body?.innerText.includes('documentation'),null,{timeout:30000});
 console.log('PASS eight alternating home/address submissions after built-in page transitions');}finally{await b.close()}
