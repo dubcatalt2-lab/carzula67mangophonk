@@ -61,6 +61,7 @@ html=html.replace('<button class="set-dropdown-opt" data-value="brave"', '<butto
 html=html.replace('confirm before close','close protection').replace('ask before closing with tabs open','ask before leaving or closing Novene');
 for(const [old,theme] of Object.entries({n:'green',red:'red',blue:'blue',black:'black',white:'white'}))html=html.replaceAll('https://cdn.frostedbrowser.cfd/wallpapers/'+old+'.png','/wallpapers/moon.jpg');
 html=html.replace('Search with Brave...','Search the web...');
+html=html.replace('<div class="set-body">','<div class="set-body"><section class="set-group"><div class="set-group-title"><i data-lucide="user-round"></i><span>accounts</span></div><div class="set-card" data-account-settings></div></section>');
 html=html.replace('</head>' ,'<link rel="stylesheet" href="/connection-panel.css"><link rel="stylesheet" href="/wallpapers.css"><link rel="stylesheet" href="/community.css"></head>');
 html=html.replace('</body>',tags+'<script src="/page-security.js"></script><script src="/connection-panel.js"></script><script src="/ai-catalog.js"></script><script src="/search-default.js"></script><script src="/wallpapers.js"></script><script src="/oneko.js"></script><script src="/account-access.js"></script><script src="/community.js"></script></body>');
 await writeFile('public/index.html','<!doctype html>\n'+html.replace(/^[ \t]+$/gm,''));

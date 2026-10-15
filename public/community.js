@@ -9,6 +9,7 @@ let me=null,users=[],messages=[],room='general',mode='chat',socket,retry,opened=
 const $=s=>view.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const avatar=u=>u.avatar?`<img src="${esc(u.avatar)}" alt="">`:`<span>${esc((u.displayName||u.username||'?')[0].toUpperCase())}</span>`;
 async function api(path,method='GET',body){const r=await fetch('/api/community'+path,{method,headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});const data=await r.json();if(!r.ok)throw Error(data.error||'Unable to connect.');if(['/login','/register','/logout'].includes(path))window.dispatchEvent(new Event('novene-account-changed'));return data;}
+window.noveneOpenAccount=async()=>{try{const data=await api('/session');me=data.user;if(me){await refresh();profile(me);}else auth(data.ownerSetupRequired);}catch(e){error(e);}};
 function error(e){$('.community-error').textContent=e.message||e;}
 function close(){if(recorder?.state==='recording')recorder.stop();opened=false;view.hidden=true;button.classList.remove('active');}
 async function open(){opened=true;view.hidden=false;button.classList.add('active');urlInput.value='novene://chatroom';try{const data=await api('/session');me=data.user;if(!me){auth(data.ownerSetupRequired);render();return;}await refresh();connect();}catch(e){error(e);}}
