@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="monetag" content="ffc7d5d5188ac6fd86f6cb91348a3f2c"/>
+
     <title>novene</title>
 
-        <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f7a4d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E"/>
+        <link rel="icon" href="/n-logo.svg"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 
     <style>
@@ -53,7 +53,7 @@ body {
     pointer-events:none;
     background:
         linear-gradient(var(--wall-tint, rgba(4,10,7,.55)), var(--wall-tint-2, rgba(4,10,7,.72))),
-        url("https://cdn.frostedbrowser.cfd/wallpapers/n.png") center / cover no-repeat,
+        url("/wallpapers/moon.jpg") center / cover no-repeat,
         var(--bg);
     filter:blur(18px) saturate(1.15);
     transform:scale(1.1);
@@ -1179,7 +1179,7 @@ body[data-mode="red"] {
 body[data-mode="red"] .wallpaper {
     background:
         linear-gradient(var(--wall-tint, rgba(24,6,6,.55)), var(--wall-tint-2, rgba(24,6,6,.72))),
-        url("https://cdn.frostedbrowser.cfd/wallpapers/red.png") center / cover no-repeat,
+        url("/wallpapers/moon.jpg") center / cover no-repeat,
         var(--bg);
 }
 body[data-mode="blue"] {
@@ -1197,7 +1197,7 @@ body[data-mode="blue"] {
 body[data-mode="blue"] .wallpaper {
     background:
         linear-gradient(var(--wall-tint, rgba(6,12,26,.55)), var(--wall-tint-2, rgba(6,12,26,.72))),
-        url("https://cdn.frostedbrowser.cfd/wallpapers/blue.png") center / cover no-repeat,
+        url("/wallpapers/moon.jpg") center / cover no-repeat,
         var(--bg);
 }
 body[data-mode="black"] {
@@ -1218,7 +1218,7 @@ body[data-mode="black"] {
 body[data-mode="black"] .wallpaper {
     background:
         linear-gradient(var(--wall-tint, rgba(0,0,0,.55)), var(--wall-tint-2, rgba(0,0,0,.72))),
-        url("https://cdn.frostedbrowser.cfd/wallpapers/black.png") center / cover no-repeat,
+        url("/wallpapers/moon.jpg") center / cover no-repeat,
         var(--bg);
 }
 body[data-mode="white"] {
@@ -1239,7 +1239,7 @@ body[data-mode="white"] {
 body[data-mode="white"] .wallpaper {
     background:
         linear-gradient(var(--wall-tint, rgba(255,255,255,.55)), var(--wall-tint-2, rgba(255,255,255,.72))),
-        url("https://cdn.frostedbrowser.cfd/wallpapers/white.png") center / cover no-repeat,
+        url("/wallpapers/moon.jpg") center / cover no-repeat,
         var(--bg);
 }
 body[data-mode="white"] .set-seg {
@@ -2118,7 +2118,7 @@ body[data-mode="white"] .set-dropdown-menu {
     .set-side-head { display:none; }
 }
 </style>
-<link rel="stylesheet" href="/wallpapers.css"><link rel="stylesheet" href="/community.css"></head>
+<link rel="stylesheet" href="/connection-panel.css"><link rel="stylesheet" href="/wallpapers.css"><link rel="stylesheet" href="/community.css"></head>
 
 <body>
 
@@ -2175,7 +2175,7 @@ body[data-mode="white"] .set-dropdown-menu {
                         </div>
                         <div class="main-search">
                             <i data-lucide="search" class="main-search-icon"></i>
-                            <input type="text" class="main-search-input" id="homeSearch" placeholder="Search with Brave..." spellcheck="false" autocomplete="off"/>
+                            <input type="text" class="main-search-input" id="homeSearch" placeholder="Search the web..." spellcheck="false" autocomplete="off"/>
                         </div>
                     </div>
                     <button id="homeDiscord" class="discord-fab" title="novene discord" aria-label="novene discord"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg><span>discord</span></button>
@@ -2248,7 +2248,7 @@ body[data-mode="white"] .set-dropdown-menu {
 
                 <div class="set-view" id="setView">
                         <nav class="set-side" id="setSide" aria-label="settings sections"><div class="set-side-head">settings</div></nav>
-                        <div class="set-body">
+                        <div class="set-body"><section class="set-group"><div class="set-group-title"><i data-lucide="user-round"></i><span>accounts</span></div><div class="set-card" data-account-settings></div></section>
 
                             <section class="set-group">
                                 <div class="set-group-title"><i data-lucide="palette"></i><span>appearance</span></div>
@@ -2305,7 +2305,7 @@ body[data-mode="white"] .set-dropdown-menu {
                                                 <i data-lucide="chevron-down"></i>
                                             </button>
                                             <div class="set-dropdown-menu" id="setSearchMenu">
-                                                <button class="set-dropdown-opt" data-value="brave" type="button">brave</button>
+                                                <button class="set-dropdown-opt" data-value="bing" type="button">bing reader</button><button class="set-dropdown-opt" data-value="brave" type="button">brave</button>
                                                 <button class="set-dropdown-opt" data-value="ddg" type="button">duckduckgo</button>
                                                 <button class="set-dropdown-opt" data-value="google" type="button">google</button>
                                                 <button class="set-dropdown-opt" data-value="startpage" type="button">startpage</button>
@@ -2380,8 +2380,8 @@ body[data-mode="white"] .set-dropdown-menu {
                                     <div class="set-row">
                                         <div class="set-ic"><i data-lucide="shield-alert"></i></div>
                                         <div class="set-info">
-                                            <span class="set-label">confirm before close</span>
-                                            <span class="set-sub">ask before closing with tabs open</span>
+                                            <span class="set-label">close protection</span>
+                                            <span class="set-sub">ask before leaving or closing Novene</span>
                                         </div>
                                         <button class="set-toggle" id="setAntiClose" role="switch" aria-checked="true">
                                             <span class="set-knob"></span>
@@ -2467,5 +2467,5 @@ body[data-mode="white"] .set-dropdown-menu {
 
 
 
-    <script src="/vendor/marked.min.js"></script><script src="/vendor/katex/katex.min.js"></script><script src="/vendor/engine/__90638.js"></script><script src="/vendor/controller/controller.api.js"></script><script>window.$nvectrl=window.$__90638Controller;</script><script src="/original/1.js"></script><script src="/original/6.js"></script><script src="/original/7.js"></script><script src="/original/8.js"></script><script src="/original/9.js"></script><script src="/original/10.js"></script><script src="/original/11.js"></script><script src="/original/12.js"></script><script src="/original/13.js"></script><script src="/wallpapers.js"></script><script src="/community.js"></script></body>
+    <script src="/input.js"></script><script src="/vendor/purify.min.js"></script><script src="/vendor/marked.min.js"></script><script src="/vendor/katex/katex.min.js"></script><script src="/vendor/engine/__90638.js"></script><script src="/vendor/controller/controller.api.js"></script><script>window.$nvectrl=window.$__90638Controller;</script><script src="/original/1.js"></script><script src="/original/6.js"></script><script src="/original/7.js"></script><script src="/original/8.js"></script><script src="/original/9.js"></script><script src="/original/10.js"></script><script src="/original/11.js"></script><script src="/original/12.js"></script><script src="/original/13.js"></script><script src="/page-security.js"></script><script src="/connection-panel.js"></script><script src="/ai-catalog.js"></script><script src="/search-default.js"></script><script src="/wallpapers.js"></script><script src="/oneko.js"></script><script src="/account-access.js"></script><script src="/community.js"></script></body>
 </html>

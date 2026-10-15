@@ -1,0 +1,20 @@
+[Unit]
+Description=Novene restricted location selector
+After=novene-vpn-namespace.service
+Requires=novene-vpn-namespace.service
+[Service]
+User=root
+Group=novene
+ExecStart=/usr/bin/python3 /opt/novene-vpn/deploy/vpn-control.py
+RuntimeDirectory=novene-vpn-control
+RuntimeDirectoryMode=0750
+StateDirectory=novene-vpn
+UMask=0007
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/run/novene-vpn-control /var/lib/novene-vpn
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=Novene isolated New York network
+After=network-online.target
+Wants=network-online.target
+Before=novene-vpn.service
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/novene-vpn/deploy/vpn-namespace.py
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target

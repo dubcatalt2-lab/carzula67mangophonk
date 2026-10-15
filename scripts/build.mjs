@@ -22,3 +22,12 @@ console.log('Built matching SJv2/controller assets and patched libcurl socket cl
 
 await cp('node_modules/katex/dist','public/vendor/katex',{recursive:true});
 await cp('node_modules/marked/marked.min.js','public/vendor/marked.min.js');
+await cp('node_modules/dompurify/dist/purify.min.js','public/vendor/purify.min.js');
+
+await import('./publish.mjs');
+
+await mkdir('.published/licenses',{recursive:true});
+await cp('LICENSE','.published/licenses/application.txt');
+for(const [pkg,name] of [['@mercuryworkshop/libcurl-transport','student'],['wispurr','courier'],['dompurify','sanitizer']]){
+ try{await cp('node_modules/'+pkg+'/LICENSE','.published/licenses/'+name+'.txt');}catch(error){if(error.code!=='ENOENT')throw error;}
+}
