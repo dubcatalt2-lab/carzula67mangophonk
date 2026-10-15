@@ -1,0 +1,7 @@
+﻿novene.altarworship.org.uk {
+ bind 127.0.0.1
+ request_body {
+  max_size 58MB
+ }
+ reverse_proxy 127.0.0.1:8181
+}

@@ -5,3 +5,5 @@ public/vendor/
 *.log
 data/
 .env.*
+
+.published/

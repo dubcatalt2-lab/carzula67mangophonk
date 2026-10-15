@@ -1,0 +1,25 @@
+[Unit]
+Description=Novene New York browsing gateway
+Requires=novene-vpn-namespace.service
+After=novene-vpn-namespace.service
+[Service]
+User=novene
+Group=novene
+WorkingDirectory=/opt/novene-vpn
+ExecStart=/usr/bin/node /opt/novene-vpn/deploy/vpn-gateway.mjs
+NetworkNamespacePath=/run/netns/novene-vpn
+BindReadOnlyPaths=/etc/novene-vpn/resolv.conf:/etc/resolv.conf
+RuntimeDirectory=novene-vpn
+RuntimeDirectoryMode=0750
+UMask=0007
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/run/novene-vpn
+MemoryMax=512M
+TasksMax=40
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
