@@ -96,3 +96,11 @@ DuckDuckGo full/HTML/Lite endpoints still return upstream errors through the sha
 Validation: 21 working-tree unit tests pass (including two dormant solver tests); source and published owner dashboard role/ban/restore tests pass; the published browsing and community suites pass. Error recovery was tested through the live connection and reaches Bing results without changing the default preference. Deployment status is recorded after activation.
 
 Release 16d848e activated at /var/www/novene-access-20261014. Clean release: 19 tests pass, obfuscated dashboard and chat browser checks pass. Both public hostnames return HTTPS 200 and healthy backend responses; deployed commons.js/reading.js hashes match the tested package. Anonymous dashboard access returns 401 and the owner button stays hidden. Live DuckDuckGo error recovery reaches explicitly labeled Bing results while retaining the DuckDuckGo preference. Backup: /home/ubuntu/novene-setup/before-roles-16d848e.tar.gz. Service restart completed after the existing stop timeout; unfinished solver files were excluded.
+
+## 2026-10-15 - Ashburn VPN default
+
+Owner requested us-qas-wg-304 (Ashburn, VA; WireGuard endpoint 23.234.97.127:51820). Selected the existing validated private profile through the restricted control socket; selection.json now persists that hostname. Public /api/connection and fresh gateway provider check both confirm enabled/connected and exact hostname; WireGuard latest handshake is nonzero. A raw ip-netns curl initially failed DNS because it does not inherit the service's resolv.conf bind; the actual gateway check passed. The endpoint address is not necessarily the public browsing exit IP.
+
+Startup now defaults to that profile when no saved selection exists, preserves saved owner choices, and rejects invalid/missing profile paths rather than silently using New York. Syntax and isolated selection checks passed (default, saved choice, invalid hostname, missing profile). Deployed only /opt/novene-vpn/deploy/vpn-namespace.py, exact SHA256 verified; backup vpn-namespace.before-ashburn-default.py retained. No service restart required for current selection. Nyx and other app files unchanged.
+
+Prepared from origin/main abe77cc in .artifacts/ashburn-default to preserve collaborator changes and unrelated dirty VPN/solver work. GitHub push pending owner's commit message.

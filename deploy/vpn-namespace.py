@@ -42,12 +42,15 @@ run('ip', 'netns', 'add', name)
 run('ip', 'link', 'add', 'nvewg0', 'type', 'wireguard')
 run('ip', 'link', 'set', 'nvewg0', 'netns', name)
 selection = Path('/var/lib/novene-vpn/selection.json')
+selected = 'us-qas-wg-304'
 if selection.exists():
-    selected = json.loads(selection.read_text()).get('hostname', '')
-    if re.fullmatch(r'[a-z]{2}-[a-z0-9]+-wg-[0-9]{3}', selected):
-        profile = Path('/etc/wireguard/novene-locations') / (selected + '.conf')
-        if profile.is_file():
-            private = profile
+    selected = json.loads(selection.read_text()).get('hostname', selected)
+if not re.fullmatch(r'[a-z]{2}-[a-z0-9]+-wg-[0-9]{3}', selected):
+    raise SystemExit('Invalid saved location.')
+profile = Path('/etc/wireguard/novene-locations') / (selected + '.conf')
+if not profile.is_file() or profile.is_symlink():
+    raise SystemExit('Selected location profile is missing or invalid.')
+private = profile
 run('ip', 'netns', 'exec', name, 'wg', 'setconf', 'nvewg0', str(private))
 run('ip', '-n', name, 'link', 'set', 'lo', 'up')
 for address in addresses:
