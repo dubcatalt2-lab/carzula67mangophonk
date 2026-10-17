@@ -104,3 +104,7 @@ Owner requested us-qas-wg-304 (Ashburn, VA; WireGuard endpoint 23.234.97.127:518
 Startup now defaults to that profile when no saved selection exists, preserves saved owner choices, and rejects invalid/missing profile paths rather than silently using New York. Syntax and isolated selection checks passed (default, saved choice, invalid hostname, missing profile). Deployed only /opt/novene-vpn/deploy/vpn-namespace.py, exact SHA256 verified; backup vpn-namespace.before-ashburn-default.py retained. No service restart required for current selection. Nyx and other app files unchanged.
 
 Prepared from origin/main abe77cc in .artifacts/ashburn-default to preserve collaborator changes and unrelated dirty VPN/solver work. GitHub push pending owner's commit message.
+
+## 2026-10-16 - Explanatory comment cleanup (local only)
+
+Prepared in C:/Users/dubca/Downloads/Novene-Comments-20261016, branch maintenance/comments-20261016, base origin/main46c6ed6. Original dirty VPN/solver work is untouched. Six source files lose24 explanatory comments, including5 in obfs.py; JavaScript/Python syntax trees unchanged. Existing names/APIs/obfuscation mappings/licenses remain. Existing obfuscation build and20 unit tests pass; community browser test passes with no page errors. Full published browser suite passes wallpaper/hover stages but times out on external example.com navigation in the isolated local environment. No commit, push or deployment.

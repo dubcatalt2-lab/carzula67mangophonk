@@ -4,15 +4,15 @@ import re
 import sys
 
 TOKEN = "__90638"
-# Strings baked into the .wasm can't change length, so they get a token as long as 'scramjet'.
+                                                                                              
 WASM_TOKEN = TOKEN + "0"
 
 CONTENT_EXTENSIONS = {".js", ".mjs", ".cjs", ".html"}
 SKIP_DIRS = {"node_modules", ".git", "types"}
 
-# Case-insensitive; the lookbehind keeps npm package names (@mercuryworkshop/scramjet, ...)
-# intact since node resolves them, not the browser.
-# $scramjet$setrealmfn is hardcoded in the .wasm, so the JS side must use WASM_TOKEN to match.
+                                                                                           
+                                                   
+                                                                                              
 PATTERN = re.compile(
     r"(?<!mercuryworkshop/)scramjet(\$setrealmfn)?", re.IGNORECASE
 )
@@ -50,7 +50,7 @@ def rewrite_contents(path):
     if ext not in CONTENT_EXTENSIONS:
         return False
     try:
-        # newline="" keeps CRLF/LF endings untouched
+                                                    
         with open(path, "r", encoding="utf-8", newline="") as f:
             content = f.read()
     except (UnicodeDecodeError, OSError):

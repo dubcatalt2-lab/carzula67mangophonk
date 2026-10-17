@@ -9,7 +9,7 @@ for(const [pkg,directory] of [['scramjet','engine'],['scramjet-controller','cont
 const client=await readFile('public/vendor/http/index.mjs','utf8');
 await writeFile('public/vendor/http/index.mjs',patchClientSockets(client));
 
-// Fresh copies carry the original names; rename them to match the rest of public/.
+                                                                                   
 const renamed=spawnSync(process.platform==='win32'?'python':'python3',['obfs.py','public/vendor'],{stdio:'inherit'});
 if(renamed.status!==0)throw Error('obfs.py failed; vendor assets still use the original names');
 
@@ -24,7 +24,7 @@ await cp('node_modules/katex/dist','public/vendor/katex',{recursive:true});
 await cp('node_modules/marked/marked.min.js','public/vendor/marked.min.js');
 await cp('node_modules/dompurify/dist/purify.min.js','public/vendor/purify.min.js');
 
-// Stale outputs from earlier naming schemes would otherwise stay served.
+                                                                         
 await rm('.published',{recursive:true,force:true});
 await import('./publish.mjs');
 

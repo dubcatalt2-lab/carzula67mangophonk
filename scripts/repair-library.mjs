@@ -20,12 +20,12 @@ export function repairLibrary(code) {
     if(method.key.name==='playGame'){
       text=text.replace('this.currentGameUrl=game.url;', 'this.launchController?.abort();const controller=this.launchController=new AbortController();const timeout=setTimeout(()=>controller.abort(),20000);this.currentGameUrl=game.url;');
       text=text.replace('try{const response=await fetch(game.url);', 'this.iframe.srcdoc="<body style=\"background:#111;color:#ddd;font:16px system-ui;display:grid;place-items:center;height:90vh\">Loading…</body>";try{const response=await fetch(game.url,{signal:controller.signal});if(!response.ok)throw Error("Download failed");');
-      // Do not change root-relative asset URLs into directory-relative URLs.
+                                                                             
       text=text.replace(/htmlText=htmlText\.replace\(\/\(src\|href\|action\|data\)[\s\S]*?;(?=const baseUrl)/,'');
       text=text.replace('this.currentGameHtml=htmlText;', 'if(controller!==this.launchController||controller.signal.aborted)return;this.currentGameHtml=htmlText;');
       text=text.replace('this.iframe.removeAttribute("srcdoc");this.iframe.src=game.url', 'if(controller!==this.launchController)return;this.iframe.srcdoc="<body style=\"background:#111;color:#ddd;font:16px system-ui;padding:40px\">This game could not be downloaded. Go back and try again.</body>";');
       text=text.replace(/}$/, 'finally{clearTimeout(timeout)}}');
-      // Quote the HTML literals independently of the generated method source.
+                                                                              
       text=text.replaceAll('style="background:', "style='background:").replaceAll('90vh">', "90vh'>").replaceAll('40px">', "40px'>");
     }
     if(method.key.name==='closeGame')text=text.replace('{','{this.launchController?.abort();this.launchController=null;');

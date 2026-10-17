@@ -54,7 +54,7 @@ for(const i of [1,6,7,8,9,10,11,12,13]){
  if(i===11){const node=parse(code,{ecmaVersion:'latest'}).body.find(n=>n.type==='FunctionDeclaration'&&n.id.name==='checkPlusKey');if(!node)throw Error('Key description contract changed');code=code.slice(0,node.start)+`function checkPlusKey(){if(setPlusKeySub){setPlusKeySub.textContent="No ads yet. Contact @vdrtes on Discord or dubcatalt2@gmail.com for inquiries.";setPlusKeySub.style.color="";}}`+code.slice(node.end);}
  if(i===11)code=code.replace('search:"brave"','search:"ddg"');
  if(i===8)code=code.replace('const hasTabs=[...tabs.values()].some(t=>t.kind==="browser"&&t.url);','const hasTabs=true;');
- // The original shell's online indicator belongs to this installation.
+                                                                       
  code=code.replaceAll('https://frostedbrowser.cfd/api/ai','/api/ai').replaceAll('https://frostedbrowser.cfd/api/session','/api/session').replaceAll('https://frostedbrowser.cfd/api/ping','/api/ping').replaceAll('https://frostedbrowser.cfd/api/ccu','/api/ccu');
  await writeFile(`public/original/${i}.js`,code);tags+=`<script src="/original/${i}.js"></script>`;
 }
